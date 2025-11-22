@@ -1,0 +1,340 @@
+/* ============================================
+   RESPONSIVE DESIGN
+   Mobile-first approach
+   ============================================ */
+
+/* === MOBILE (< 768px) === */
+@media (max-width: 767px) {
+
+    /* Tipografía */
+    :root {
+        --text-6xl: 2.5rem;
+        --text-5xl: 2rem;
+        --text-4xl: 1.75rem;
+        --text-3xl: 1.5rem;
+    }
+
+    /* Header */
+    .header-container {
+        padding: var(--space-3) var(--space-4);
+    }
+
+    .logo {
+        width: 50px;
+        height: 50px;
+    }
+
+    .logo-text h1 {
+        font-size: var(--text-xl);
+    }
+
+    .logo-text .tagline {
+        display: none;
+    }
+
+    /* Navegación Mobile */
+    .nav {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: var(--white);
+        flex-direction: column;
+        padding: var(--space-8);
+        transform: translateX(-100%);
+        transition: transform var(--transition-base);
+        box-shadow: var(--shadow-xl);
+        z-index: var(--z-fixed);
+    }
+
+    .nav.active {
+        transform: translateX(0);
+    }
+
+    .nav a {
+        width: 100%;
+        padding: var(--space-4);
+        font-size: var(--text-lg);
+        text-align: center;
+        border-bottom: 1px solid var(--gray-200);
+    }
+
+    .nav .btn-reserva {
+        margin-left: 0;
+        margin-top: var(--space-4);
+        width: 100%;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    /* Hero */
+    .hero {
+        min-height: 90vh;
+        padding-top: 70px;
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+        padding: var(--space-4);
+    }
+
+    .hero-content h2 {
+        font-size: var(--text-4xl);
+    }
+
+    .hero-content p {
+        font-size: var(--text-base);
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .hero-badge {
+        top: 10px;
+        right: 10px;
+        padding: var(--space-4);
+    }
+
+    .hero-badge .number {
+        font-size: var(--text-2xl);
+    }
+
+    /* Secciones */
+    .section {
+        padding: var(--space-12) 0;
+    }
+
+    .section-header h2 {
+        font-size: var(--text-3xl);
+    }
+
+    .section-header p {
+        font-size: var(--text-base);
+    }
+
+    /* Servicios */
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+        padding: 0 var(--space-4);
+    }
+
+    .service-icon {
+        width: 60px;
+        height: 60px;
+        font-size: var(--text-3xl);
+    }
+
+    /* Habitaciones */
+    .rooms-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+        padding: 0 var(--space-4);
+    }
+
+    .room-image {
+        height: 200px;
+    }
+
+    .room-footer {
+        flex-direction: column;
+        gap: var(--space-4);
+        align-items: flex-start;
+    }
+
+    .room-footer .btn {
+        width: 100%;
+    }
+
+    /* Estadísticas */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-6);
+    }
+
+    .stat-number {
+        font-size: var(--text-4xl);
+    }
+
+    .stat-label {
+        font-size: var(--text-base);
+    }
+
+    /* CTA */
+    .cta h2 {
+        font-size: var(--text-3xl);
+    }
+
+    .cta p {
+        font-size: var(--text-base);
+    }
+
+    /* Footer */
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+        padding: 0 var(--space-4);
+    }
+
+    .footer-section {
+        text-align: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    /* Formularios */
+    .form-control {
+        font-size: 16px;
+        /* Evita zoom en iOS */
+    }
+}
+
+/* === TABLET (768px - 1023px) === */
+@media (min-width: 768px) and (max-width: 1023px) {
+
+    /* Hero */
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: var(--space-10);
+    }
+
+    .hero-content {
+        text-align: center;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-image {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    /* Servicios */
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Habitaciones */
+    .rooms-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Estadísticas */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Footer */
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* === DESKTOP LARGE (> 1440px) === */
+@media (min-width: 1440px) {
+    :root {
+        --container-width: 1400px;
+    }
+
+    .hero-content h2 {
+        font-size: 4.5rem;
+    }
+
+    .section-header h2 {
+        font-size: 3.5rem;
+    }
+}
+
+/* === LANDSCAPE MOBILE === */
+@media (max-width: 767px) and (orientation: landscape) {
+    .hero {
+        min-height: auto;
+        padding: var(--space-12) 0;
+    }
+
+    .hero-image {
+        display: none;
+    }
+}
+
+/* === PRINT === */
+@media print {
+
+    .site-header,
+    .menu-toggle,
+    .hero-buttons,
+    .btn,
+    .site-footer {
+        display: none;
+    }
+
+    body {
+        font-size: 12pt;
+        color: #000;
+    }
+
+    a {
+        text-decoration: underline;
+    }
+}
+
+/* === REDUCED MOTION === */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* === DARK MODE (Opcional) === */
+@media (prefers-color-scheme: dark) {
+    /* Descomenta si quieres soporte para dark mode
+  :root {
+    --bg: #0f1419;
+    --text: #e2e8f0;
+    --gray-100: #1a1f2e;
+    --gray-200: #2d3748;
+  }
+  
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+  }
+  
+  .card,
+  .service-card,
+  .room-card {
+    background: var(--gray-100);
+  }
+  */
+}

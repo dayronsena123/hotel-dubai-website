@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Admin Hotel Dubai</title>
+    <link rel="icon" type="image/x-icon" href="../img/logo.jpg">
+    <link rel="stylesheet" href="../css/design-system.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <style>
+        body {
+            margin: 0;
+            background: var(--gray-100);
+        }
+
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .admin-sidebar {
+            width: 260px;
+            background: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .admin-main {
+            margin-left: 260px;
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .admin-header {
+            background: white;
+            padding: 1.5rem 2rem;
+            margin: -2rem -2rem 2rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-logo {
+            text-align: center;
+            padding: 0 1.5rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .admin-logo img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .admin-logo h2 {
+            font-size: 1.25rem;
+            margin: 0;
+        }
+
+        .admin-nav a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .admin-nav a:hover,
+        .admin-nav a.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        .recent-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 2px solid var(--gray-200);
+            color: var(--gray-700);
+            font-weight: 600;
+        }
+
+        td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .btn-sm {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <img src="../img/logo.jpg" alt="Hotel Dubai">
+                <h2>Hotel Dubai</h2>
+                <p style="font-size: 0.85rem; opacity: 0.7; margin: 0;">Panel Administrativo</p>
+            </div>
+
+            <nav class="admin-nav">
+                <a href="dashboard.html" class="active">
+                    <span>📊</span> Dashboard
+                </a>
+                <a href="reservas.html">
+                    <span>📅</span> Reservas
+                </a>
+                <a href="mensajes.html">
+                    <span>✉️</span> Mensajes
+                </a>
+                <a href="../index.html" target="_blank">
+                    <span>🌐</span> Ver Sitio Web
+                </a>
+                <a href="#" onclick="adminPanel.logout(); return false;"
+                    style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
+                    <span>🚪</span> Cerrar Sesión
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <div class="admin-header">
+                <div>
+                    <h1 style="margin: 0; font-size: 1.75rem;">Dashboard</h1>
+                    <p style="margin: 0.25rem 0 0; color: var(--gray-600);">Bienvenido al panel de administración</p>
+                </div>
+                <div>
+                    <span style="color: var(--gray-600);" id="adminEmail"></span>
+                </div>
+            </div>
+
+            <!-- Estadísticas -->
+            <div class="stats-grid" id="statsGrid">
+                <!-- Se llenará con JavaScript -->
+            </div>
+
+            <!-- Reservas Recientes -->
+            <div class="recent-section">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h2 style="margin: 0;">Reservas Recientes</h2>
+                    <a href="reservas.html" class="btn btn-primary btn-sm">Ver Todas</a>
+                </div>
+                <div id="recentReservations">
+                    <!-- Se llenará con JavaScript -->
+                </div>
+            </div>
+
+            <!-- Mensajes Recientes -->
+            <div class="recent-section">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h2 style="margin: 0;">Mensajes Recientes</h2>
+                    <a href="mensajes.html" class="btn btn-primary btn-sm">Ver Todos</a>
+                </div>
+                <div id="recentMessages">
+                    <!-- Se llenará con JavaScript -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/admin.js"></script>
+    <script>
+        // Cargar email del admin
+        document.getElementById('adminEmail').textContent = localStorage.getItem('adminEmail') || '';
+
+        // Cargar estadísticas
+        function loadStats() {
+            const stats = adminPanel.getStats();
+            const statsGrid = document.getElementById('statsGrid');
+
+            statsGrid.innerHTML = `
+        <div class="stat-card">
+          <div class="stat-icon" style="background: var(--gradient-primary);">📅</div>
+          <div class="stat-value">${stats.totalReservations}</div>
+          <div class="stat-label">Total Reservas</div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon" style="background: var(--gradient-accent);">⏳</div>
+          <div class="stat-value">${stats.pendingReservations}</div>
+          <div class="stat-label">Reservas Pendientes</div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon" style="background: var(--gradient-secondary);">💰</div>
+          <div class="stat-value">S/ ${stats.totalRevenue}</div>
+          <div class="stat-label">Ingresos Totales</div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon" style="background: linear-gradient(135deg, #17a2b8 0%, #4fc3f7 100%);">✉️</div>
+          <div class="stat-value">${stats.newMessages}</div>
+          <div class="stat-label">Mensajes Nuevos</div>
+        </div>
+      `;
+        }
+
+        // Cargar reservas recientes
+        function loadRecentReservations() {
+            const reservations = adminPanel.getReservations().slice(-5).reverse();
+            const container = document.getElementById('recentReservations');
+
+            if (reservations.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--gray-600); padding: 2rem;">No hay reservas aún</p>';
+                return;
+            }
+
+            let html = '<table><thead><tr><th>ID</th><th>Nombre</th><th>Habitación</th><th>Check-in</th><th>Estado</th><th>Total</th></tr></thead><tbody>';
+
+            reservations.forEach(r => {
+                html += `
+          <tr>
+            <td>#${r.id}</td>
+            <td>${r.name}</td>
+            <td>${r.roomType}</td>
+            <td>${adminPanel.formatDateShort(r.checkin)}</td>
+            <td>${adminPanel.getStatusBadge(r.status)}</td>
+            <td>S/ ${r.total}</td>
+          </tr>
+        `;
+            });
+
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
+        // Cargar mensajes recientes
+        function loadRecentMessages() {
+            const messages = adminPanel.getContactMessages().slice(-5).reverse();
+            const container = document.getElementById('recentMessages');
+
+            if (messages.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--gray-600); padding: 2rem;">No hay mensajes aún</p>';
+                return;
+            }
+
+            let html = '<table><thead><tr><th>ID</th><th>Nombre</th><th>Email</th><th>Asunto</th><th>Fecha</th><th>Estado</th></tr></thead><tbody>';
+
+            messages.forEach(m => {
+                html += `
+          <tr>
+            <td>#${m.id}</td>
+            <td>${m.name}</td>
+            <td>${m.email}</td>
+            <td>${m.subject}</td>
+            <td>${adminPanel.formatDateShort(m.createdAt)}</td>
+            <td>${adminPanel.getStatusBadge(m.status)}</td>
+          </tr>
+        `;
+            });
+
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
+        // Inicializar
+        loadStats();
+        loadRecentReservations();
+        loadRecentMessages();
+    </script>
+</body>
+
+</html>

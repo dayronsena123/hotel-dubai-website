@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Hotel Dubai</title>
+    <link rel="icon" type="image/x-icon" href="../img/logo.jpg">
+    <link rel="stylesheet" href="../css/design-system.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <style>
+        body {
+            background: var(--gradient-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .login-container {
+            background: white;
+            padding: 3rem;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-2xl);
+            max-width: 450px;
+            width: 100%;
+            animation: scaleIn 0.5s ease;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.5rem;
+            border-radius: var(--radius-full);
+            object-fit: cover;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .login-title {
+            font-size: var(--text-3xl);
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .login-subtitle {
+            color: var(--gray-600);
+            font-size: var(--text-sm);
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .alert-error {
+            background: #fee;
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+
+        .alert-success {
+            background: #efe;
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <img src="../img/logo.jpg" alt="Hotel Dubai Logo" class="login-logo">
+            <h1 class="login-title">Panel Administrativo</h1>
+            <p class="login-subtitle">Hotel Dubai - Chiriaco</p>
+        </div>
+
+        <div id="loginAlert" class="alert"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label class="form-label" for="email">
+                    Email <span style="color: var(--danger);">*</span>
+                </label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="admin@hoteldubai.com"
+                    required autocomplete="username">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="password">
+                    Contraseña <span style="color: var(--danger);">*</span>
+                </label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="••••••••"
+                    required autocomplete="current-password">
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 1rem;">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20" style="margin-right: 0.5rem;">
+                    <path fill-rule="evenodd" password: 'hoteldubai2019' }; // Verificar si ya está logueado if
+                        (localStorage.getItem('adminLoggedIn')==='true' ) { window.location.href='dashboard.html' ; } //
+                        Manejar formulario de login document.getElementById('loginForm').addEventListener('submit',
+                        function (e) { e.preventDefault(); const email=document.getElementById('email').value; const
+                        password=document.getElementById('password').value; const
+                        alert=document.getElementById('loginAlert'); // Validar credenciales if
+                        (email===ADMIN_CREDENTIALS.email && password===ADMIN_CREDENTIALS.password) { // Login exitoso
+                        localStorage.setItem('adminLoggedIn', 'true' ); localStorage.setItem('adminEmail', email);
+                        localStorage.setItem('adminLoginTime', new Date().toISOString()); // Mostrar mensaje de éxito
+                        alert.className='alert alert-success' ; alert.style.display='block' ;
+                        alert.textContent='✓ Login exitoso. Redirigiendo...' ; // Redirigir al dashboard setTimeout(()=>
+                        {
+                        window.location.href = 'dashboard.html';
+                        }, 1000);
+                        } else {
+                        // Login fallido
+                        alert.className = 'alert alert-error';
+                        alert.style.display = 'block';
+                        alert.textContent = '✗ Email o contraseña incorrectos';
+
+                        // Limpiar contraseña
+                        document.getElementById('password').value = '';
+                        }
+                        });
+                        </script>
+</body>
+
+</html>

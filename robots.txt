@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Bloquear panel administrativo
+Disallow: /admin/
+
+# Sitemap
+Sitemap: https://hoteldubai.com/sitemap.xml

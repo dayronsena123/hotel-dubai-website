@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Mensajes - Admin Hotel Dubai</title>
+    <link rel="icon" type="image/x-icon" href="../img/logo.jpg">
+    <link rel="stylesheet" href="../css/design-system.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <style>
+        body {
+            margin: 0;
+            background: var(--gray-100);
+        }
+
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .admin-sidebar {
+            width: 260px;
+            background: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .admin-main {
+            margin-left: 260px;
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .admin-header {
+            background: white;
+            padding: 1.5rem 2rem;
+            margin: -2rem -2rem 2rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-logo {
+            text-align: center;
+            padding: 0 1.5rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .admin-logo img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .admin-nav a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .admin-nav a:hover,
+        .admin-nav a.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .filters {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: end;
+        }
+
+        .content-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 2px solid var(--gray-200);
+            color: var(--gray-700);
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--gray-200);
+            font-size: 0.875rem;
+        }
+
+        .btn-sm {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+        }
+
+        .actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--gray-600);
+        }
+
+        .empty-state svg {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+
+        .message-preview {
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <img src="../img/logo.jpg" alt="Hotel Dubai">
+                <h2>Hotel Dubai</h2>
+                <p style="font-size: 0.85rem; opacity: 0.7; margin: 0;">Panel Administrativo</p>
+            </div>
+
+            <nav class="admin-nav">
+                <a href="dashboard.html">
+                    <span>📊</span> Dashboard
+                </a>
+                <a href="reservas.html">
+                    <span>📅</span> Reservas
+                </a>
+                <a href="mensajes.html" class="active">
+                    <span>✉️</span> Mensajes
+                </a>
+                <a href="../index.html" target="_blank">
+                    <span>🌐</span> Ver Sitio Web
+                </a>
+                <a href="#" onclick="adminPanel.logout(); return false;"
+                    style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
+                    <span>🚪</span> Cerrar Sesión
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <div class="admin-header">
+                <div>
+                    <h1 style="margin: 0; font-size: 1.75rem;">Gestión de Mensajes</h1>
+                    <p style="margin: 0.25rem 0 0; color: var(--gray-600);">Administra los mensajes de contacto</p>
+                </div>
+                <div>
+                    <button onclick="exportMessages()" class="btn btn-secondary btn-sm">
+                        📥 Exportar CSV
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filtros -->
+            <div class="filters">
+                <div class="form-group" style="margin: 0; min-width: 200px;">
+                    <label class="form-label" style="margin-bottom: 0.5rem;">Estado</label>
+                    <select id="filterStatus" class="form-control" onchange="filterMessages()">
+                        <option value="all">Todos</option>
+                        <option value="new">Nuevos</option>
+                        <option value="read">Leídos</option>
+                        <option value="responded">Respondidos</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="margin: 0; min-width: 200px;">
+                    <label class="form-label" style="margin-bottom: 0.5rem;">Asunto</label>
+                    <select id="filterSubject" class="form-control" onchange="filterMessages()">
+                        <option value="all">Todos</option>
+                        <option value="reserva">Reserva</option>
+                        <option value="habitacion">Habitación</option>
+                        <option value="precio">Precio</option>
+                        <option value="servicio">Servicio</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="margin: 0; flex: 1; min-width: 200px;">
+                    <label class="form-label" style="margin-bottom: 0.5rem;">Buscar</label>
+                    <input type="text" id="searchInput" class="form-control" placeholder="Nombre, email..."
+                        oninput="filterMessages()">
+                </div>
+            </div>
+
+            <!-- Tabla de Mensajes -->
+            <div class="content-section">
+                <div id="messagesTable">
+                    <!-- Se llenará con JavaScript -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/admin.js"></script>
+    <script>
+        let allMessages = [];
+
+        // Cargar mensajes
+        function loadMessages() {
+            allMessages = adminPanel.getContactMessages().reverse();
+            renderMessages(allMessages);
+        }
+
+        // Renderizar tabla
+        function renderMessages(messages) {
+            const container = document.getElementById('messagesTable');
+
+            if (messages.length === 0) {
+                container.innerHTML = `
+          <div class="empty-state">
+            <svg fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+            </svg>
+            <h3>No hay mensajes</h3>
+            <p>Los mensajes de contacto aparecerán aquí.</p>
+          </div>
+        `;
+                return;
+            }
+
+            let html = `
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Contacto</th>
+              <th>Asunto</th>
+              <th>Mensaje</th>
+              <th>Fecha</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+            messages.forEach(m => {
+                html += `
+          <tr style="${m.status === 'new' ? 'background: rgba(255, 235, 59, 0.1);' : ''}">
+            <td><strong>#${m.id}</strong></td>
+            <td>${m.name}</td>
+            <td>
+              <div style="font-size: 0.8rem;">
+                📧 ${m.email}<br>
+                ${m.phone !== 'No proporcionado' ? `📞 ${m.phone}` : ''}
+              </div>
+            </td>
+            <td>${getSubjectName(m.subject)}</td>
+            <td>
+              <div class="message-preview" title="${m.message}">
+                ${m.message}
+              </div>
+            </td>
+            <td>${adminPanel.formatDateShort(m.createdAt)}</td>
+            <td>${adminPanel.getStatusBadge(m.status)}</td>
+            <td>
+              <div class="actions">
+                <button onclick="viewMessage(${m.id})" class="btn btn-sm btn-primary" title="Ver completo">
+                  👁️
+                </button>
+                ${m.status === 'new' ? `
+                  <button onclick="markAsRead(${m.id})" class="btn btn-sm" style="background: var(--info); color: white;" title="Marcar como leído">
+                    ✓
+                  </button>
+                ` : ''}
+                <button onclick="deleteMessage(${m.id})" class="btn btn-sm" style="background: var(--danger); color: white;" title="Eliminar">
+                  🗑️
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+            });
+
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
+        // Filtrar mensajes
+        function filterMessages() {
+            const status = document.getElementById('filterStatus').value;
+            const subject = document.getElementById('filterSubject').value;
+            const search = document.getElementById('searchInput').value.toLowerCase();
+
+            let filtered = allMessages;
+
+            if (status !== 'all') {
+                filtered = filtered.filter(m => m.status === status);
+            }
+
+            if (subject !== 'all') {
+                filtered = filtered.filter(m => m.subject === subject);
+            }
+
+            if (search) {
+                filtered = filtered.filter(m =>
+                    m.name.toLowerCase().includes(search) ||
+                    m.email.toLowerCase().includes(search) ||
+                    m.message.toLowerCase().includes(search)
+                );
+            }
+
+            renderMessages(filtered);
+        }
+
+        // Ver mensaje completo
+        function viewMessage(id) {
+            const message = allMessages.find(m => m.id === id);
+            if (!message) return;
+
+            // Marcar como leído automáticamente
+            if (message.status === 'new') {
+                adminPanel.updateMessageStatus(id, 'read');
+                loadMessages();
+                filterMessages();
+            }
+
+            const content = `
+        <h2 style="margin-bottom: 1.5rem;">Mensaje #${message.id}</h2>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+          <div>
+            <h3 style="color: var(--primary); margin-bottom: 1rem;">Información del Remitente</h3>
+            <div style="line-height: 2;">
+              <div><strong>Nombre:</strong> ${message.name}</div>
+              <div><strong>Email:</strong> <a href="mailto:${message.email}" style="color: var(--secondary);">${message.email}</a></div>
+              ${message.phone !== 'No proporcionado' ? `<div><strong>Teléfono:</strong> <a href="tel:${message.phone}" style="color: var(--secondary);">${message.phone}</a></div>` : ''}
+            </div>
+          </div>
+          
+          <div>
+            <h3 style="color: var(--primary); margin-bottom: 1rem;">Detalles</h3>
+            <div style="line-height: 2;">
+              <div><strong>Asunto:</strong> ${getSubjectName(message.subject)}</div>
+              <div><strong>Fecha:</strong> ${adminPanel.formatDate(message.createdAt)}</div>
+              <div><strong>Estado:</strong> ${adminPanel.getStatusBadge(message.status)}</div>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 style="color: var(--primary); margin-bottom: 1rem;">Mensaje</h3>
+          <div style="background: var(--gray-100); padding: 1.5rem; border-radius: var(--radius); line-height: 1.8;">
+            ${message.message}
+          </div>
+        </div>
+        
+        <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
+          <a href="mailto:${message.email}" class="btn btn-primary">
+            📧 Responder por Email
+          </a>
+          ${message.phone !== 'No proporcionado' ? `
+            <a href="tel:${message.phone}" class="btn btn-secondary">
+              📞 Llamar
+            </a>
+            <a href="https://wa.me/51${message.phone.replace(/\s/g, '')}" target="_blank" class="btn btn-accent">
+              💬 WhatsApp
+            </a>
+          ` : ''}
+        </div>
+      `;
+
+            window.hotelDubai.createModal(content);
+        }
+
+        // Marcar como leído
+        function markAsRead(id) {
+            if (adminPanel.updateMessageStatus(id, 'read')) {
+                adminPanel.showAdminNotification('Mensaje marcado como leído', 'success');
+                loadMessages();
+                filterMessages();
+            }
+        }
+
+        // Eliminar mensaje
+        function deleteMessage(id) {
+            if (adminPanel.deleteMessage(id)) {
+                adminPanel.showAdminNotification('Mensaje eliminado', 'success');
+                loadMessages();
+                filterMessages();
+            }
+        }
+
+        // Exportar a CSV
+        function exportMessages() {
+            const data = allMessages.map(m => ({
+                ID: m.id,
+                Nombre: m.name,
+                Email: m.email,
+                Telefono: m.phone,
+                Asunto: getSubjectName(m.subject),
+                Mensaje: m.message,
+                Estado: m.status,
+                Fecha: m.createdAt
+            }));
+
+            adminPanel.exportToCSV(data, 'mensajes-hotel-dubai.csv');
+        }
+
+        // Obtener nombre del asunto
+        function getSubjectName(subject) {
+            const subjects = {
+                'reserva': 'Consulta sobre Reserva',
+                'habitacion': 'Información de Habitaciones',
+                'precio': 'Consulta de Precios',
+                'servicio': 'Servicios del Hotel',
+                'otro': 'Otro'
+            };
+            return subjects[subject] || subject;
+        }
+
+        // Inicializar
+        loadMessages();
+    </script>
+</body>
+
+</html>
