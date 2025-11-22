@@ -103,31 +103,67 @@
 
             <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 1rem;">
                 <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20" style="margin-right: 0.5rem;">
-                    <path fill-rule="evenodd" password: 'hoteldubai2019' }; // Verificar si ya está logueado if
-                        (localStorage.getItem('adminLoggedIn')==='true' ) { window.location.href='dashboard.html' ; } //
-                        Manejar formulario de login document.getElementById('loginForm').addEventListener('submit',
-                        function (e) { e.preventDefault(); const email=document.getElementById('email').value; const
-                        password=document.getElementById('password').value; const
-                        alert=document.getElementById('loginAlert'); // Validar credenciales if
-                        (email===ADMIN_CREDENTIALS.email && password===ADMIN_CREDENTIALS.password) { // Login exitoso
-                        localStorage.setItem('adminLoggedIn', 'true' ); localStorage.setItem('adminEmail', email);
-                        localStorage.setItem('adminLoginTime', new Date().toISOString()); // Mostrar mensaje de éxito
-                        alert.className='alert alert-success' ; alert.style.display='block' ;
-                        alert.textContent='✓ Login exitoso. Redirigiendo...' ; // Redirigir al dashboard setTimeout(()=>
-                        {
-                        window.location.href = 'dashboard.html';
-                        }, 1000);
-                        } else {
-                        // Login fallido
-                        alert.className = 'alert alert-error';
-                        alert.style.display = 'block';
-                        alert.textContent = '✗ Email o contraseña incorrectos';
+                    <path fill-rule="evenodd"
+                        d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z" />
+                </svg>
+                Iniciar Sesión
+            </button>
+        </form>
 
-                        // Limpiar contraseña
-                        document.getElementById('password').value = '';
-                        }
-                        });
-                        </script>
+        <div style="margin-top: 2rem; text-align: center;">
+            <a href="../index.html" style="color: var(--primary); font-size: var(--text-sm);">
+                ← Volver al sitio web
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Configuración
+        const ADMIN_CREDENTIALS = {
+            email: 'hoteldubai2019@gmail.com',
+            password: 'hoteldubai2019'
+        };
+
+        // Verificar si ya está logueado
+        if (localStorage.getItem('adminLoggedIn') === 'true') {
+            window.location.href = 'dashboard.html';
+        }
+
+        // Manejar formulario de login
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const alert = document.getElementById('loginAlert');
+
+            // Validar credenciales
+            if (email === ADMIN_CREDENTIALS.email && password === ADMIN_CREDENTIALS.password) {
+                // Login exitoso
+                localStorage.setItem('adminLoggedIn', 'true');
+                localStorage.setItem('adminEmail', email);
+                localStorage.setItem('adminLoginTime', new Date().toISOString());
+
+                // Mostrar mensaje de éxito
+                alert.className = 'alert alert-success';
+                alert.style.display = 'block';
+                alert.textContent = '✓ Login exitoso. Redirigiendo...';
+
+                // Redirigir al dashboard
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1000);
+            } else {
+                // Login fallido
+                alert.className = 'alert alert-error';
+                alert.style.display = 'block';
+                alert.textContent = '✗ Email o contraseña incorrectos';
+
+                // Limpiar contraseña
+                document.getElementById('password').value = '';
+            }
+        });
+    </script>
 </body>
 
 </html>
