@@ -344,7 +344,8 @@
 /* === HABITACIONES === */
 .rooms-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 450px));
+    justify-content: center;
     gap: var(--space-8);
     max-width: var(--container-width);
     margin: 0 auto;
@@ -356,12 +357,18 @@
     border-radius: var(--radius-xl);
     overflow: hidden;
     box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(0, 0, 0, 0.05);
     transition: all var(--transition-base);
 }
 
 .room-card:hover {
     transform: translateY(-10px);
-    box-shadow: var(--shadow-2xl);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), var(--shadow-glow);
+    border-color: rgba(212, 175, 55, 0.4);
+}
+
+.room-card:hover .room-image img {
+    transform: scale(1.08);
 }
 
 .room-image {
@@ -577,9 +584,20 @@
 
 /* === FOOTER === */
 .site-footer {
-    background: var(--dark);
+    background: linear-gradient(180deg, #0f1419 0%, #1a1f2e 100%);
     color: var(--gray-400);
-    padding: var(--space-16) 0 var(--space-6);
+    padding: var(--space-16) 0 0;
+    position: relative;
+}
+
+.site-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
 }
 
 .footer-content {
@@ -587,20 +605,38 @@
     margin: 0 auto;
     padding: 0 var(--space-6);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: 2fr 1fr 1.5fr 1fr;
     gap: var(--space-12);
     margin-bottom: var(--space-12);
 }
 
 .footer-section h3 {
     color: var(--white);
-    font-size: var(--text-xl);
-    margin-bottom: var(--space-6);
+    font-size: var(--text-lg);
+    font-family: var(--font-body);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--space-5);
+    position: relative;
+    padding-bottom: var(--space-3);
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 36px;
+    height: 2px;
+    background: var(--gradient-secondary);
+    border-radius: var(--radius-full);
 }
 
 .footer-section p {
     line-height: 1.8;
     margin-bottom: var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--gray-500);
 }
 
 .footer-links {
@@ -608,73 +644,140 @@
 }
 
 .footer-links li {
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-2);
 }
 
 .footer-links a {
-    color: var(--gray-400);
-    transition: color var(--transition-base);
+    color: var(--gray-500);
+    font-size: var(--text-sm);
+    transition: all var(--transition-base);
     display: flex;
     align-items: center;
     gap: var(--space-2);
+    padding: var(--space-1) 0;
 }
 
 .footer-links a:hover {
     color: var(--secondary);
+    padding-left: var(--space-2);
 }
 
+/* Contact items in footer */
 .contact-item {
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     gap: var(--space-3);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-5);
+}
+
+.contact-item:last-child {
+    margin-bottom: 0;
 }
 
 .contact-icon {
-    width: 40px;
-    height: 40px;
-    background: var(--gradient-secondary);
+    width: 36px;
+    height: 36px;
+    background: rgba(212, 175, 55, 0.12);
+    border: 1px solid rgba(212, 175, 55, 0.25);
     border-radius: var(--radius);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--dark);
+    color: var(--secondary);
     flex-shrink: 0;
+    transition: all var(--transition-base);
 }
 
+.contact-item:hover .contact-icon {
+    background: var(--gradient-secondary);
+    color: var(--dark);
+    border-color: transparent;
+}
+
+.contact-item strong {
+    display: block;
+    color: var(--gray-300);
+    font-size: var(--text-sm);
+    margin-bottom: 2px;
+}
+
+.contact-item a,
+.contact-item span {
+    color: var(--gray-500);
+    font-size: var(--text-sm);
+    transition: color var(--transition-base);
+}
+
+.contact-item:hover a {
+    color: var(--secondary);
+}
+
+/* Social links */
 .social-links {
     display: flex;
     gap: var(--space-3);
-    margin-top: var(--space-6);
+    margin-top: var(--space-5);
 }
 
 .social-link {
-    width: 45px;
-    height: 45px;
-    background: var(--gray-800);
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--radius-full);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--white);
+    color: var(--gray-400);
     transition: all var(--transition-base);
 }
 
 .social-link:hover {
     background: var(--gradient-secondary);
+    border-color: transparent;
     color: var(--dark);
     transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
 }
 
+/* Footer bottom bar */
 .footer-bottom {
-    max-width: var(--container-width);
-    margin: 0 auto;
-    padding: var(--space-6) var(--space-6) 0;
-    border-top: 1px solid var(--gray-800);
-    text-align: center;
+    max-width: 100%;
+    margin: 0;
+    padding: var(--space-5) var(--space-6);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .footer-bottom p {
     margin: 0;
+    font-size: var(--text-xs);
+    color: var(--gray-600);
+    letter-spacing: 0.3px;
+}
+
+/* Schedule items in footer */
+.footer-schedule-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     font-size: var(--text-sm);
+}
+
+.footer-schedule-item:last-child {
+    border-bottom: none;
+}
+
+.footer-schedule-item strong {
+    color: var(--gray-300);
+}
+
+.footer-schedule-item span {
+    color: var(--secondary);
+    font-weight: 500;
 }

@@ -4,15 +4,13 @@
 
 // === CONFIGURACIÓN ===
 const ROOM_PRICES = {
-    sencilla: 40,
-    doble: 60,
-    familiar: 90
+    sencilla: 35,
+    doble: 60
 };
 
 const ROOM_NAMES = {
     sencilla: 'Habitación Sencilla',
-    doble: 'Habitación Doble',
-    familiar: 'Habitación Familiar'
+    doble: 'Habitación Doble'
 };
 
 // === INICIALIZACIÓN ===
