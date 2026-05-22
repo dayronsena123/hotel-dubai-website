@@ -8,47 +8,47 @@
 
 /* === CSS VARIABLES === */
 :root {
-  /* Colores Principales */
-  --primary: #1a4d7a;
-  --primary-light: #2980b9;
-  --primary-dark: #0f3554;
-  --secondary: #d4af37;
-  --secondary-light: #f4d03f;
-  --secondary-dark: #b8941f;
-  --accent: #ff6b35;
-  --accent-light: #ff8c5f;
-  --accent-dark: #e55a2b;
+  /* Colores Principales (Midnight Luxury & Brilliant Gold) */
+  --primary: #0f172a;       /* Azul marino ultra profundo (medianoche) */
+  --primary-light: #1e293b; /* Azul grisáceo elegante */
+  --primary-dark: #020617;  /* Azul oscuro casi negro */
+  --secondary: #e2b13c;     /* Dorado Dubai vibrante y lujoso */
+  --secondary-light: #fcd34d;/* Oro champaña brillante */
+  --secondary-dark: #b8860b; /* Bronce oscuro / Oro envejecido */
+  --accent: #b45309;        /* Ámbar/Bronce cálido que armoniza con el oro */
+  --accent-light: #d97706;  /* Ámbar brillante */
+  --accent-dark: #78350f;   /* Cobre quemado profundo */
   
   /* Colores Neutros */
-  --dark: #0f1419;
-  --gray-900: #1a1f2e;
-  --gray-800: #2d3748;
-  --gray-700: #4a5568;
-  --gray-600: #718096;
-  --gray-500: #a0aec0;
-  --gray-400: #cbd5e0;
-  --gray-300: #e2e8f0;
-  --gray-200: #edf2f7;
-  --gray-100: #f7fafc;
-  --light: #f8f9fa;
+  --dark: #0a0f1d;          /* Fondo oscuro premium */
+  --gray-900: #0f172a;
+  --gray-800: #1e293b;
+  --gray-700: #334155;
+  --gray-600: #475569;
+  --gray-500: #64748b;
+  --gray-400: #94a3b8;
+  --gray-300: #cbd5e1;
+  --gray-200: #e2e8f0;
+  --gray-100: #f1f5f9;
+  --light: #f8fafc;
   --white: #ffffff;
   
   /* Colores de Estado */
-  --success: #28a745;
-  --success-light: #48c774;
-  --warning: #ffc107;
-  --warning-light: #ffd54f;
-  --danger: #dc3545;
-  --danger-light: #ff5252;
-  --info: #17a2b8;
-  --info-light: #4fc3f7;
+  --success: #10b981;
+  --success-light: #34d399;
+  --warning: #f59e0b;
+  --warning-light: #fbbf24;
+  --danger: #ef4444;
+  --danger-light: #f87171;
+  --info: #06b6d4;
+  --info-light: #22d3ee;
   
   /* Gradientes */
-  --gradient-primary: linear-gradient(135deg, #1a4d7a 0%, #2980b9 100%);
-  --gradient-secondary: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
-  --gradient-accent: linear-gradient(135deg, #ff6b35 0%, #ff8c5f 100%);
-  --gradient-dark: linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%);
-  --gradient-overlay: linear-gradient(135deg, rgba(26, 77, 122, 0.9) 0%, rgba(41, 128, 185, 0.8) 100%);
+  --gradient-primary: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  --gradient-secondary: linear-gradient(135deg, #ffd700 0%, #e2b13c 100%);
+  --gradient-accent: linear-gradient(135deg, #b45309 0%, #d97706 100%);
+  --gradient-dark: linear-gradient(180deg, #0a0f1d 0%, #0f172a 100%);
+  --gradient-overlay: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%);
   
   /* Tipografía */
   --font-heading: 'Playfair Display', Georgia, serif;

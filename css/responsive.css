@@ -144,7 +144,11 @@
     .service-icon {
         width: 60px;
         height: 60px;
-        font-size: var(--text-3xl);
+    }
+
+    .service-icon svg {
+        width: 26px;
+        height: 26px;
     }
 
     /* Habitaciones */
